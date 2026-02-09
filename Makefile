@@ -14,8 +14,9 @@ build/%: ./config/%
 	docker run \
 		-v .:/root/workspace \
 		-e "FORCE=${FORCE}" \
+		-e "CONFIG_PATH=$<" \
 		${DOCKER_IMAGE} \
-		/bin/bash -c "cd /root/workspace && ./build.sh $<"
+		/bin/bash -c 'cd /root/workspace && ./build.sh "$$CONFIG_PATH"'
 
 dist: $(patsubst build/%,dist/libretro_cores_%.7z,$(wildcard build/*))
 

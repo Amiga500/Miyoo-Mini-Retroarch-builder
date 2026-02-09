@@ -1,3 +1,5 @@
 dist/
 build/
 config/*/libretro-cores
+__pycache__/
+*.pyc
