@@ -223,7 +223,7 @@ rm config/<target>/libretro-cores
 make clean
 
 # Rebuild
-make build/<target>
+make build/linux-armv7-neon
 ```
 
 ### 10. "disk space" or "no space left" errors

@@ -223,7 +223,7 @@ subprocess.run(["git", "clone", url], check=True)
    ```csv
    core_name,libretro-core_name,https://github.com/libretro/core_name.git,master,YES,GENERIC,Makefile.libretro,.
    ```
-4. Test: `make build/<target>`
+4. Test: `make build/linux-armv7-neon` (replace with your target)
 5. Submit PR with:
    - CSV changes
    - Brief description of core

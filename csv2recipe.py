@@ -39,7 +39,9 @@ def validate_url(url):
     if not url:
         raise ValueError("URL cannot be empty")
     # Only allow https git URLs for security
-    if not re.match(r'^https://[a-zA-Z0-9\-\./_]+\.git$', url):
+    # Domain part: lowercase letters, digits, hyphens, dots (no underscores per RFC 1035)
+    # Path part: can include underscores
+    if not re.match(r'^https://[a-zA-Z0-9\-\.]+(/[a-zA-Z0-9_\-\.]+)*\.git$', url):
         raise ValueError(f"Invalid URL: {url} (must be https:// and end with .git)")
     return url
 
@@ -119,7 +121,8 @@ def main():
                     enabled = validate_enabled(row.get('enabled', '').strip())
                     command = validate_command(row.get('command', '').strip())
                     makefile = row.get('makefile', '').strip()
-                    subdir = validate_dir(row.get('subdir', '.').strip()) if row.get('subdir', '').strip() else '.'
+                    subdir_raw = row.get('subdir', '').strip()
+                    subdir = validate_dir(subdir_raw) if subdir_raw else '.'
                     args = validate_args(row.get('args', '').strip())
                     
                     # Build output line
